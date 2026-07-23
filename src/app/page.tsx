@@ -1,8 +1,9 @@
 import Link from "next/link";
+import JoinModal from "@/components/JoinModal";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center w-full h-[100dvh] overflow-hidden bg-black text-white font-sans selection:bg-yellow-500/30">
+    <main className="flex flex-col items-center justify-center w-full min-h-[100dvh] overflow-x-hidden bg-black text-white font-sans selection:bg-yellow-500/30">
       
       {/* Subtle bottom glow to match the reference image's button glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[200px] bg-yellow-600/20 blur-[100px] pointer-events-none"></div>
@@ -48,22 +49,13 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Main CTA Button */}
-          <Link href="https://t.me/" target="_blank" className="w-full group relative block animate-heartbeat mt-1">
-            {/* Pulsing Glow Background */}
-            <div className="absolute inset-0 bg-[#EAB308] rounded-3xl blur-md animate-pulse opacity-60"></div>
-            
-            <button className="w-full relative flex items-center justify-center gap-2 bg-gradient-to-r from-[#B48325] via-[#FCE486] to-[#B48325] text-black font-black text-lg sm:text-xl py-3.5 sm:py-4 rounded-3xl transition-transform active:scale-95 shadow-[0_0_20px_rgba(234,179,8,0.5)]">
-              {/* Telegram Icon */}
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-black" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.25-5.61 3.66-.53.36-1.01.53-1.44.52-.48-.01-1.39-.27-2.07-.49-.83-.27-1.49-.41-1.43-.87.03-.23.36-.47.98-.73 3.84-1.67 6.41-2.77 7.72-3.31 3.67-1.53 4.43-1.8 4.93-1.8.11 0 .36.03.49.13.11.08.15.2.16.32.02.09.02.19.01.27z"/>
-              </svg>
-              <span>QO'SHILISH</span>
-            </button>
-          </Link>
+          {/* Main CTA Button (Desktop only) */}
+          <div className="hidden lg:block w-full">
+            <JoinModal />
+          </div>
 
-          {/* Under button text */}
-          <div className="w-full flex items-center justify-center gap-1.5 sm:gap-2 text-[#D4AF37] font-semibold text-[11px] sm:text-xs mt-0.5 animate-bounce">
+          {/* Under button text (Desktop only) */}
+          <div className="hidden lg:flex w-full items-center justify-center gap-1.5 sm:gap-2 text-[#D4AF37] font-semibold text-[11px] sm:text-xs mt-0.5 animate-bounce">
             <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
@@ -87,6 +79,17 @@ export default function Home() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Mobile CTA Button (Mobile only, rendered at the bottom) */}
+        <div className="flex lg:hidden w-full flex-col items-center justify-center gap-2 mt-2 max-w-[500px]">
+          <JoinModal />
+          <div className="w-full flex items-center justify-center gap-1.5 sm:gap-2 text-[#D4AF37] font-semibold text-[11px] sm:text-xs animate-bounce">
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            <span>Telegram guruhga qo'shiling</span>
+          </div>
         </div>
 
       </div>
