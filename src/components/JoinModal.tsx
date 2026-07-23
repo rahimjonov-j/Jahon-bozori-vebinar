@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { submitRegistration } from "@/lib/api";
+import { event } from "@/lib/gtag";
 
 export default function JoinModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,6 +77,13 @@ export default function JoinModal() {
 
       await submitRegistration(dataToSend);
       
+      // Google Analytics: Track successful form submission
+      event({
+        action: "submit_form_success",
+        category: "registration",
+        label: formData.yonalish,
+      });
+
       showToast("Muvaffaqiyatli yuborildi!", "success");
       setFormData({ ism: "", familya: "", nomer: "+998", yonalish: "" });
       
@@ -107,7 +115,14 @@ export default function JoinModal() {
 
       {/* Main CTA Button Trigger */}
       <div 
-        onClick={() => setIsOpen(true)} 
+        onClick={() => {
+          setIsOpen(true);
+          event({
+            action: "click_join_button",
+            category: "engagement",
+            label: "Telegram guruhga qo'shilish oynasi",
+          });
+        }} 
         className="w-full group relative block animate-heartbeat mt-1 cursor-pointer"
       >
         <div className="absolute inset-0 bg-[#EAB308] rounded-3xl blur-md animate-pulse opacity-60"></div>
